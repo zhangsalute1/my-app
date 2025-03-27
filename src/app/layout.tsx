@@ -48,6 +48,12 @@ export default function RootLayout({
                 >
                   关于
                 </Link>
+                <Link
+                  href="/apitest"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+                >
+                  API测试
+                </Link>
               </div>
             </div>
           </nav>
