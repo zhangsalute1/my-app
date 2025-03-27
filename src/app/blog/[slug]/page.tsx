@@ -1,6 +1,6 @@
-import { blogPosts } from "../data";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import BlogPost from "@/components/blog/BlogPost";
+import { notFound } from "next/navigation";
 
 interface BlogPostPageProps {
   params: {
@@ -8,13 +8,7 @@ interface BlogPostPageProps {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPosts.find((post) => post.slug === params.slug);
-
-  if (!post) {
-    notFound();
-  }
-
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="container mx-auto px-4 py-8 max-w-4xl">
@@ -25,14 +19,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           ← 返回博客列表
         </Link>
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <time className="text-sm text-gray-500 dark:text-gray-400 block mb-8">
-            {post.date}
-          </time>
-
-          <div className="whitespace-pre-wrap">{post.content}</div>
-        </article>
+        <BlogPost slug={params.slug} />
       </main>
     </div>
   );
