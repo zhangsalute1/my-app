@@ -1,14 +1,14 @@
 import Link from "next/link";
 import BlogPost from "@/components/blog/BlogPost";
 
-interface Props {
-  params: {
-    slug: string;
-  };
+type PageProps = {
+  params: Promise<{ slug: string }>;
   searchParams: { [key: string]: string | string[] | undefined };
-}
+};
 
-export default async function BlogPostPage({ params, searchParams }: Props) {
+export default async function BlogPostPage({ params }: PageProps) {
+  const resolvedParams = await params;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="container mx-auto px-4 py-8 max-w-4xl">
@@ -19,7 +19,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
           ← 返回博客列表
         </Link>
 
-        <BlogPost slug={params.slug} />
+        <BlogPost slug={resolvedParams.slug} />
       </main>
     </div>
   );
